@@ -4,6 +4,7 @@ theme:
   palette:
     # Palette toggle for dark mode
     - scheme: slate
+      primary: deep orange
 
       toggle:
         icon: material/brightness-4
@@ -11,6 +12,7 @@ theme:
 
     # Palette toggle for light mode
     - scheme: default
+      primary: deep orange
 
       toggle:
         icon: material/brightness-7 
@@ -43,6 +45,8 @@ plugins:
           options:
             members_order: source
             show_root_toc_entry: false
+            show_source: false
+            show_bases: false
 
 # extra_css:
 #   - stylesheets/extra.css
@@ -61,7 +65,7 @@ nav:
     - 'utilities.md'
     - 'calculators.md'
   - 'Models':
-    - 'models/api.md'
     - 'models/heston.md'
     - 'models/hullwhite.md'
     - 'models/localvol.md'
+    - 'models/api.md'

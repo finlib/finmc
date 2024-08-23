@@ -17,13 +17,17 @@ $$
 
 where \(dW_s\) and \(dW_t\) are Wiener processes with correlation \(\rho\).
 
-The model specific component in the dataset (`HESTON`) is a dict with five parameters, and the name of the asset:
+### Dataset
 
-* \(\nu_0\), the initial variance (INITIAL_VAR).
-* \(\theta\), the long variance (LONG_VAR).
-* \(\rho\), the correlation (CORRELATION).
-* \(\kappa\), the mean reversion rate (MEANREV)).
-* \(\xi\), the volatility of the volatility (VOL_OF_VOL).
+The model specific component in the dataset (`HESTON`) is a dict with the following parameters:
+
+* ASSET: the name of the asset
+* INITIAL_VAR: the initial variance \(\nu_0\)
+* LONG_VAR: the long variance \(\theta\)
+* VOL_OF_VOL: the volatility of the volatility \(\xi\)
+* MEANREV: the mean reversion rate \(\kappa\)
+* CORRELATION: the correlation \(\rho\)
+
 
 ### Example
 

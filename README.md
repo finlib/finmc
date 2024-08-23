@@ -1,15 +1,20 @@
 # finmc
 
-[![CI](https://github.com/somdipdatta/finmc/actions/workflows/main.yml/badge.svg)](https://github.com/somdipdatta/finmc/actions/workflows/main.yml)
+[![CI](https://github.com/finlib/finmc/actions/workflows/main.yml/badge.svg)](https://github.com/finlib/finmc/actions/workflows/main.yml)
 
-This package contains Monte-Carlo implementations of many financial models derived from a common interface class. This interface allows computation of instruments with european, and american payoffs, as well as path dependent calculations.
+This package contains Monte-Carlo implementations of many financial models derived from a common interface class. This interface allows for
 
-See complete [documentation here.](https://somdipdatta.github.io/finmc/)
+ - [Shared utilities](https://finlib.github.io/finmc/utilities/) that can be used for all models for tasks such as calculating implied vol surface.
+ - [Price Calculators](https://finlib.github.io/finmc/calculators/) that are model invariant.
+ - The interace is designed for high performance, even with a large number of paths.
+ - New models can be created outside this repositary, by indepedent contributors, and yet be compatible with above utilities and calculators.
+
+See complete [documentation here.](https://finlib.github.io/finmc/)
 
 <table>
 <tr>
-<td> <img src="https://raw.githubusercontent.com/somdipdatta/finmc/main/images/impliedvol.png" alt="implied vol"/> </td>
-<td> <img src="https://raw.githubusercontent.com/somdipdatta/finmc/main/images/rate_mc.png" alt="rate mc"/> </td>
+<td> <img src="https://raw.githubusercontent.com/finlib/finmc/main/images/impliedvol.png" alt="implied vol"/> </td>
+<td> <img src="https://raw.githubusercontent.com/finlib/finmc/main/images/rate_mc.png" alt="rate mc"/> </td>
 </tr>
 </table>
 

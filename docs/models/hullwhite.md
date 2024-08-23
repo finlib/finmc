@@ -13,12 +13,16 @@ $$
 
 where \(dW_t\) is a Wiener process.
 
-The model specific component in the dataset (`HW`) is a dict with two parameters, and the name of the asset:
+### Dataset
 
-* \(a\), the mean reversion rate (MEANREV)).
-* \(\sigma\), the volatility of rate (VOL).
+The model specific component in the dataset (`HW`) is a dict with the following parameters:
 
-\(\theta_t\) is calibrated by the model from the zero rate curve.
+* ASSET: the name of the asset
+* MEANREV: the mean reversion rate \(a\)
+* VOL: the volatility of rate \(\sigma\)
+
+
+Note: \(\theta_t\) is calibrated by the model from the zero rate curve.
 
 ### Example
 

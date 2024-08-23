@@ -1,5 +1,6 @@
 """
-Utility to calculate implied volatility surface from a MC Simulation model.
+Utility to calculate option prices or implied volatility surface from a MC Simulation, for any model.
+This is useful for calibrating the model to Black-Scholes option prices.
 """
 
 import numpy as np

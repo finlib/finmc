@@ -14,7 +14,14 @@ $$
 
 Where \(\sigma_t\) is a function of \(X_t\) and \(t\).
 
-The model specific component in the dataset (`LV`) is a dict with two parameters `ASSET` and `VOL`.
+### Dataset
+
+The model specific component in the dataset (`LV`) is a dict with the following parameters:
+
+* ASSET: the name of the asset
+* VOL: the volatility \(\sigma\)
+
+The volatility can be expressed in a number of ways as described in following examples.
 
 ### Examples
 

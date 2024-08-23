@@ -35,7 +35,7 @@ setup(
     name="finmc",
     version=read("finmc", "VERSION"),
     description="finmc is a Python library for Monte Carlo Simulation.",
-    url="https://github.com/somdipdatta/finmc/",
+    url="https://github.com/finlib/finmc/",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     author="somdipdatta",
