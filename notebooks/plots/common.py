@@ -6,7 +6,7 @@ def plot_asset(
     model,
     asset_name,
     sample_idxs=np.arange(0, 3, 1),
-    q_levels=np.linspace(0.05, 0.95, 30),
+    q_levels=np.linspace(0.02, 0.98, 25),
     times=np.linspace(0, 1, 101),
 ):
     num_levels = len(q_levels)
@@ -35,9 +35,13 @@ def plot_asset(
         )
     for sample in samples:
         ax.plot(times, sample)
-    ax.set_xlabel("Maturity (years)")
+    ax.set_xlabel("years")
     ax.set_ylabel(asset_name)
     ax.tick_params(axis="x", direction="in", pad=-15)
+
+    for side in ["left", "bottom", "right", "top"]:
+        ax.spines[side].set_visible(False)
+
     plt.show()
 
 

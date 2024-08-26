@@ -45,6 +45,6 @@ model = LVMC(dataset)
 price = opt_price_mc(5500.0, 1.0, "Call", "SPX", model)
 ```
 
-### Learn More
+## Learn More
 - [Dataset](./dataset.md) creation guide
 - [Models](./models/heston.md) included in the package
