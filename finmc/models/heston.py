@@ -11,32 +11,29 @@ from finmc.utils.assets import Discounter, Forwards
 
 # Define a class for the state of a single asset Heston MC process
 class HestonMC(MCFixedStep):
-    def reset(self, dataset):
-        self.shape = dataset["MC"]["PATHS"]
+    def reset(self):
+        self.shape = self.dataset["MC"]["PATHS"]
         assert self.shape % 2 == 0, "Number of paths must be even"
         self.n = self.shape >> 1  # divide by 2
-        self.timestep = dataset["MC"]["TIMESTEP"]
+        self.timestep = self.dataset["MC"]["TIMESTEP"]
 
         # create a random number generator
-        self.rng = Generator(SFC64(dataset["MC"]["SEED"]))
+        self.rng = Generator(SFC64(self.dataset["MC"].get("SEED")))
 
-        self.asset = dataset["HESTON"]["ASSET"]
-        self.asset_fwd = Forwards(dataset["ASSETS"][self.asset])
+        self.asset = self.dataset["HESTON"]["ASSET"]
+        self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
         self.spot = self.asset_fwd.forward(0)
-        self.discounter = Discounter(dataset["ASSETS"][dataset["BASE"]])
-
-        self.heston_params = (
-            dataset["HESTON"]["LONG_VAR"],
-            dataset["HESTON"]["VOL_OF_VOL"],
-            dataset["HESTON"]["MEANREV"],
-            dataset["HESTON"]["CORRELATION"],
+        self.discounter = Discounter(
+            self.dataset["ASSETS"][self.dataset["BASE"]]
         )
 
-        # Initialize the arrays
-        self.x_vec = np.zeros(self.shape)  # processes x (log stock)
-        self.v_vec = np.full(
-            self.shape, dataset["HESTON"]["INITIAL_VAR"]
-        )  # processes v (variance)
+        self.heston_params = (
+            self.dataset["HESTON"]["LONG_VAR"],
+            self.dataset["HESTON"]["VOL_OF_VOL"],
+            self.dataset["HESTON"]["MEANREV"],
+            self.dataset["HESTON"]["CORRELATION"],
+        )
+        self.v0 = self.dataset["HESTON"]["INITIAL_VAR"]
 
         # We will reduce time spent in memory allocation by creating arrays in advance
         # and reusing them in the `advance` function which is called repeatedly.
@@ -46,6 +43,10 @@ class HestonMC(MCFixedStep):
         self.dz2_vec = np.empty(self.shape, dtype=np.float64)
         self.vol_vec = np.empty(self.shape, dtype=np.float64)
         self.sv_vec = np.empty(self.shape, dtype=np.float64)
+
+        # Initialize the arrays
+        self.x_vec = np.zeros(self.shape)  # processes x (log stock)
+        self.v_vec = np.full(self.shape, self.v0)  # processes v (variance)
         self.cur_time = 0
 
     def advance_step(self, new_time):

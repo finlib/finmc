@@ -33,6 +33,7 @@ def iv_surface_mc(
     iv_mat = np.zeros((len(expirations), len(strikes)))
     iv_atm = []
     fwds = []
+    model.reset()
     for i, exp in enumerate(expirations):
         model.advance(exp)
         expiration_spots = model.get_value(asset_name)

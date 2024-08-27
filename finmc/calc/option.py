@@ -30,6 +30,7 @@ def opt_price_mc(
         price = opt_price_mc(K, T, "Call", "SPX", model)
     """
 
+    model.reset()
     model.advance(maturity)
     expiration_spots = model.get_value(asset_name)
     df = model.get_df()

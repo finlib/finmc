@@ -9,7 +9,7 @@ class MCBase(ABC):
     stats: dict = {}
 
     def __init__(self, dataset: dict) -> None:
-        self.reset(dataset)
+        self.dataset = dataset
 
     @abstractmethod
     def reset(self, dataset: dict):

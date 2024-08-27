@@ -9,21 +9,23 @@ from finmc.utils.assets import Discounter, Forwards
 
 # Define a single asset Black Scholes process with a flat volatility
 class BSMC(MCFixedStep):
-    def reset(self, dataset):
+    def reset(self):
         # fetch the model parameters from the dataset
-        self.n = dataset["MC"]["PATHS"]
-        self.timestep = dataset["MC"]["TIMESTEP"]
+        self.n = self.dataset["MC"]["PATHS"]
+        self.timestep = self.dataset["MC"]["TIMESTEP"]
 
-        self.asset = dataset["LV"]["ASSET"]
-        self.asset_fwd = Forwards(dataset["ASSETS"][self.asset])
+        self.asset = self.dataset["LV"]["ASSET"]
+        self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
         self.spot = self.asset_fwd.forward(0)
-        self.vol = dataset["BS"]["VOL"]
-        self.discounter = Discounter(dataset["ASSETS"][dataset["BASE"]])
+        self.vol = self.dataset["BS"]["VOL"]
+        self.discounter = Discounter(
+            self.dataset["ASSETS"][self.dataset["BASE"]]
+        )
 
         # Initialize rng and any arrays
-        self.rng = Generator(SFC64(dataset["MC"].get("SEED")))
-        self.x_vec = np.zeros(self.n)  # process x (log stock)
+        self.rng = Generator(SFC64(self.dataset["MC"].get("SEED")))
 
+        self.x_vec = np.zeros(self.n)  # process x (log stock)
         self.cur_time = 0
 
     def advance_step(self, new_time):
@@ -48,24 +50,27 @@ class BSMC(MCFixedStep):
 
 # Define a class for the state of a single asset BS Local Vol MC process
 class LVMC(MCFixedStep):
-    def reset(self, dataset):
+    def reset(self):
         # fetch the model parameters from the dataset
-        self.n = dataset["MC"]["PATHS"]
-        self.asset = dataset["LV"]["ASSET"]
-        self.asset_fwd = Forwards(dataset["ASSETS"][self.asset])
-        self.spot = self.asset_fwd.forward(0)
-        self.vol = dataset["LV"]["VOL"]
-        self.logspot = np.log(self.spot)
-        self.discounter = Discounter(dataset["ASSETS"][dataset["BASE"]])
+        self.n = self.dataset["MC"]["PATHS"]
+        self.timestep = self.dataset["MC"]["TIMESTEP"]
 
-        # Initialize rng and any arrays
-        self.rng = Generator(SFC64(dataset["MC"].get("SEED")))
-        self.x_vec = np.zeros(self.n)  # process x (log stock)
+        self.asset = self.dataset["LV"]["ASSET"]
+        self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
+        self.spot = self.asset_fwd.forward(0)
+        self.vol = self.dataset["LV"]["VOL"]
+        self.logspot = np.log(self.spot)
+        self.discounter = Discounter(
+            self.dataset["ASSETS"][self.dataset["BASE"]]
+        )
+
+        # Create rng and tmp arrays
+        self.rng = Generator(SFC64(self.dataset["MC"].get("SEED")))
         self.dz_vec = np.empty(self.n, dtype=np.float64)
         self.tmp = np.empty(self.n, dtype=np.float64)
 
-        self.timestep = dataset["MC"]["TIMESTEP"]
-
+        # Initialize the process
+        self.x_vec = np.zeros(self.n)  # process x (log stock)
         self.cur_time = 0
 
     def advance_step(self, new_time):

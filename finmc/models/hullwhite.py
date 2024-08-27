@@ -11,18 +11,21 @@ from finmc.utils.assets import Discounter
 
 # Define a class for the state of a single asset HullWhite MC process
 class HullWhiteMC(MCFixedStep):
-    def reset(self, dataset):
-        self.shape = dataset["MC"]["PATHS"]
-        self.timestep = dataset["MC"]["TIMESTEP"]
+    def reset(self):
+        self.shape = self.dataset["MC"]["PATHS"]
+        self.timestep = self.dataset["MC"]["TIMESTEP"]
 
         # create a random number generator
-        self.rng = Generator(SFC64(dataset["MC"]["SEED"]))
+        self.rng = Generator(SFC64(self.dataset["MC"].get("SEED")))
 
-        self.asset = dataset["HW"]["ASSET"]
-        self.asset_fwd = Discounter(dataset["ASSETS"][self.asset])
+        self.asset = self.dataset["HW"]["ASSET"]
+        self.asset_fwd = Discounter(self.dataset["ASSETS"][self.asset])
 
-        self.meanrev = dataset["HW"]["MEANREV"]
-        self.vol = dataset["HW"]["VOL"]
+        self.meanrev = self.dataset["HW"]["MEANREV"]
+        self.vol = self.dataset["HW"]["VOL"]
+
+        # We will reduce time spent in memory allocation by creating a tmp arrays
+        self.tmp_vec = np.empty(self.shape, dtype=np.float64)
 
         # Initialize the arrays for the processes
         self.x_vec = np.zeros(self.shape, dtype=np.float64)  # x
@@ -30,9 +33,6 @@ class HullWhiteMC(MCFixedStep):
         self.df_vec = np.ones(self.shape, dtype=np.float64)  # discount factors
         fwd_rate = self.asset_fwd.rate(self.timestep, 0)
         np.add(self.x_vec, fwd_rate, out=self.r_vec)
-
-        # We will reduce time spent in memory allocation by creating a tmp arrays
-        self.tmp_vec = np.empty(self.shape, dtype=np.float64)
 
         self.cur_time = 0
 

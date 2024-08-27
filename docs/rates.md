@@ -13,7 +13,12 @@ You can describe the base asset using a two-column (N X 2) numpy array, where th
 It can be created like
 
 ```python
-discount_data = ("ZERO_RATES", np.array([[1.0, .05], [5.0, 0.04]]))
+discount_data = ("ZERO_RATES", np.array([
+    [1.0, 0.05],
+    [2.0, 0.045]
+    [5.0, 0.04]
+    ]))
+
 dataset = {
     "BASE": "USD",
     "ASSETS": {"USD": discount_data},

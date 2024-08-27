@@ -16,6 +16,7 @@ def plot_asset(
     quantiles = np.zeros((len(q_levels), num_steps))
 
     # enumerate over the time steps and calculate the spot price
+    model.reset()
     for i, t in enumerate(times):
         model.advance(t)
         spots = model.get_value(asset_name)
@@ -65,5 +66,4 @@ if __name__ == "__main__":
     }
     # create the model and plot the progression of short rate???
     model = HullWhiteMC(dataset)
-    model.reset(dataset)
     plot_asset(model, "r")
