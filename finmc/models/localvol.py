@@ -28,7 +28,7 @@ class BSMC(MCFixedStep):
         self.x_vec = np.zeros(self.n)  # process x (log stock)
         self.cur_time = 0
 
-    def advance_step(self, new_time):
+    def step(self, new_time):
         """Update x_vec in place when we move simulation by time dt."""
 
         dt = new_time - self.cur_time
@@ -73,7 +73,7 @@ class LVMC(MCFixedStep):
         self.x_vec = np.zeros(self.n)  # process x (log stock)
         self.cur_time = 0
 
-    def advance_step(self, new_time):
+    def step(self, new_time):
         """Update x_vec in place when we move simulation by time dt."""
 
         dt = new_time - self.cur_time

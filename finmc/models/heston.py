@@ -49,7 +49,7 @@ class HestonMC(MCFixedStep):
         self.v_vec = np.full(self.shape, self.v0)  # processes v (variance)
         self.cur_time = 0
 
-    def advance_step(self, new_time):
+    def step(self, new_time):
         """Update x_vec, v_vec in place when we move simulation by time dt."""
         dt = new_time - self.cur_time
 

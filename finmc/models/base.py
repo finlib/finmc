@@ -12,7 +12,7 @@ class MCBase(ABC):
         self.dataset = dataset
 
     @abstractmethod
-    def reset(self, dataset: dict):
+    def reset(self):
         """The derived class must implement this method to reset the state of the model
         to time zero."""
         ...
@@ -44,12 +44,12 @@ class MCFixedStep(MCBase):
 
     def advance(self, new_time):
         while new_time > self.cur_time + self.timestep:
-            self.advance_step(self.cur_time + self.timestep)
+            self.step(self.cur_time + self.timestep)
         if new_time > self.cur_time + 1e-10:
-            self.advance_step(new_time)
+            self.step(new_time)
 
     @abstractmethod
-    def advance_step(self, new_time: float):
+    def step(self, new_time: float):
         """The derived class must implement this method, which advances the model by a timestep equal to or
         less than the TIMESTEP parameter."""
         ...
