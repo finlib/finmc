@@ -1,14 +1,28 @@
+"""Plot the progression of an asset in a model."""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
+from finmc.models.base import MCBase
+
 
 def plot_asset(
-    model,
-    asset_name,
+    model: MCBase,
+    asset_name: str,
     sample_idxs=np.arange(0, 3, 1),
     q_levels=np.linspace(0.02, 0.98, 25),
     times=np.linspace(0, 1, 101),
 ):
+    """Plot the progression of an asset in a model.
+
+    Args:
+        model: The model to plot.
+        asset_name: The name of the asset to plot.
+        sample_idxs (np.array, optional): The indices of the paths to plot. Defaults to np.arange(0, 3, 1).
+        q_levels (np.array, optional): The quantiles to plot. Defaults to np.linspace(0.02, 0.98, 25).
+        times (np.array, optional): The times to plot. Defaults to np.linspace(0, 1, 101).
+    """
+
     num_levels = len(q_levels)
     num_steps = len(times)
 

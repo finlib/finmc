@@ -1,9 +1,21 @@
+"""Implied Volatility Plotting Module"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 
 
 def plot_iv(strikes, expirations, surface, atm_vols, fwds):
+    """Plot the implied volatility surface and forward curve.
+
+    Args:
+        strikes (np.array): The strike prices.
+        expirations (np.array): The expiration times.
+        surface (np.array): The implied volatility surface.
+        atm_vols (np.array): The ATM volatilities.
+        fwds (np.array): The forward prices
+    """
+
     X, Y = np.meshgrid(strikes, expirations)
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(6, 6))
     ax.plot_surface(
