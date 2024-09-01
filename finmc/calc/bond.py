@@ -28,7 +28,13 @@ def zcb_price_mc(
 
     model.reset()
     model.advance(maturity)
-    return model.get_df().mean()
+    df = model.get_df()
+
+    if model.dataset.get("BASE") == asset_name:
+        return df.mean()
+    else:
+        spots = model.get_value(asset_name)
+        return (spots * df).mean()
 
 
 if __name__ == "__main__":

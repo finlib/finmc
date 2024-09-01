@@ -5,3 +5,5 @@ for calculations such as the price of vanilla options.
 
 ::: finmc.calc.option
 
+::: finmc.calc.bond
+

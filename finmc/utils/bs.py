@@ -6,6 +6,7 @@ import numpy as np
 from scipy.stats import norm
 
 N = norm.cdf
+N_prime = norm.pdf
 
 
 def d1_d2(
@@ -43,11 +44,12 @@ def impliedvol(target, F, K, T, is_call):
             price = F * N(d1) - K * N(d2)
         else:
             price = K * N(-d2) - F * N(-d1)
-        vega = F * N(d1) * np.sqrt(T)
+        vega = F * N_prime(d1) * np.sqrt(T)
         diff = target - price  # our root
         if abs(diff) < PRECISION:
             return vol
         vol = vol + diff / vega  # f(x) / f'(x)
+
     return vol
 
 
@@ -92,3 +94,7 @@ def digital_price(
     if apply_discounter:
         price = price * df
     return price, {}
+
+
+if __name__ == "__main__":
+    iv = impliedvol(8.58, 5508.3, 6400, 0.0833, True)

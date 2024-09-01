@@ -16,6 +16,10 @@ def plot_iv(strikes, expirations, surface, atm_vols, fwds):
     # Add wireframes for each expiration
     ax.plot_wireframe(X, Y, surface, color="brown", rstride=1, cstride=0)
 
+    (z0, z1) = ax.get_zlim()
+    if z1 - z0 < 0.05:
+        ax.set_zlim(z0, z0 + 0.05)
+
     ax.set_xlabel("Strike (K)")
     ax.set_ylabel("Maturity (years)")
     plt.show()
@@ -25,6 +29,10 @@ def plot_iv(strikes, expirations, surface, atm_vols, fwds):
     ax.plot(
         expirations, atm_vols, color="brown", label="Forward Curve", marker="o"
     )
+
+    (y0, y1) = ax.get_ylim()
+    if y1 - y0 < 0.05:
+        ax.set_ylim(y0 - 0.01, y0 + 0.05)
 
     ax.set_xlabel("Maturity (years)")
     ax.set_ylabel("ATM Vol")
