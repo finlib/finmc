@@ -1,5 +1,3 @@
-"""Plot the progression of an asset in a model."""
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -16,11 +14,14 @@ def plot_asset(
     """Plot the progression of an asset in a model.
 
     Args:
-        model: The model to plot.
+        model: The model to use.
         asset_name: The name of the asset to plot.
-        sample_idxs (np.array, optional): The indices of the paths to plot. Defaults to np.arange(0, 3, 1).
-        q_levels (np.array, optional): The quantiles to plot. Defaults to np.linspace(0.02, 0.98, 25).
-        times (np.array, optional): The times to plot. Defaults to np.linspace(0, 1, 101).
+        sample_idxs (np.array, optional): The indices of the sample paths to plot in the foreground. Defaults to the first three.
+        q_levels (np.array, optional): The quantiles to show in the background. Defaults to 25 levels from 2% to 98%.
+        times (np.array, optional): The timesteps. Defaults to 1 year in 100 steps.
+
+    Examples:
+        >>> plot_asset(model, "SPX")
     """
 
     num_levels = len(q_levels)

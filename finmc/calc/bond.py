@@ -23,7 +23,7 @@ def zcb_price_mc(
         The price of the zero coupon bond.
 
     Examples:
-        price = zcb_price_mc(T, "USD", model)
+        >>> price = zcb_price_mc(T, "USD", model)
     """
 
     model.reset()

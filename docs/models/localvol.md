@@ -87,3 +87,5 @@ volinterp = RegularGridInterpolator(
 
 lv_params = {"ASSET": "SPX", "VOL": volinterp}
 ```
+
+See [complete example here](https://github.com/finlib/finmc/blob/main/notebooks/localvol.ipynb)

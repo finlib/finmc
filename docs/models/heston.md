@@ -57,4 +57,7 @@ dataset = {
 model = HestonMC(dataset)
 model.advance(1.0)
 spots = model.get_value("SPX")
+
 ```
+
+See [complete example here](https://github.com/finlib/finmc/blob/main/notebooks/heston.ipynb)

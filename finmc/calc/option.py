@@ -27,7 +27,7 @@ def opt_price_mc(
         The price of the option.
 
     Examples:
-        price = opt_price_mc(K, T, "Call", "SPX", model)
+        >>> price = opt_price_mc(K, T, "Call", "SPX", model)
     """
 
     model.reset()

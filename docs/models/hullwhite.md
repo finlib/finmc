@@ -44,3 +44,5 @@ model = HullWhiteMC(dataset)
 model.advance(1.0)
 discount_factors = model.get_df()
 ```
+
+See [complete example here](https://github.com/finlib/finmc/blob/main/notebooks/hullwhite.ipynb)

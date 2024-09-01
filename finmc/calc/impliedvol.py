@@ -50,9 +50,9 @@ def iv_surface_mc(
         A tuple containing the implied volatility surface, the ATM volatilities, and the forward prices.
 
     Examples:
-        strikes = np.linspace(2900, 3100, 3)
-        expirations = [0.25, 0.5, 1]
-        surface, atm_vols, fwds = iv_surface_mc(strikes, expirations, "SPX", model)
+        >>> strikes = np.linspace(2900, 3100, 3)
+        >>> expirations = [0.25, 0.5, 1]
+        >>> surface, atm_vols, fwds = iv_surface_mc(strikes, expirations, "SPX", model)
     """
 
     iv_mat = np.zeros((len(expirations), len(strikes)))
