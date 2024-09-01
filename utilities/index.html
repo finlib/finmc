@@ -20,7 +20,7 @@
     
     
       
-        <title>Utils - finmc</title>
+        <title>Plots and more - finmc</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#utils" class="md-skip">
+        <a href="#plots-and-more" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Utils
+              Plots and more
             
           </span>
         </div>
@@ -416,7 +416,7 @@
           
   
   <span class="md-ellipsis">
-    Utils
+    Plots and more
   </span>
   
 
@@ -427,7 +427,7 @@
         
   
   <span class="md-ellipsis">
-    Utils
+    Plots and more
   </span>
   
 
@@ -447,6 +447,24 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finmc.plots.impliedvol.plot_iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_iv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finmc.plots.asset.plot_asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_asset
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#finmc.calc.impliedvol.iv_surface_mc" class="md-nav__link">
@@ -650,6 +668,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#finmc.plots.impliedvol.plot_iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_iv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finmc.plots.asset.plot_asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_asset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#finmc.calc.impliedvol.iv_surface_mc" class="md-nav__link">
     <span class="md-ellipsis">
       iv_surface_mc
@@ -673,9 +709,278 @@
                   
 
 
-<h1 id="utils">Utils</h1>
-<p><img alt="implied vol" src="../images/impliedvol.png" /></p>
-<p>(Image: See <a href="https://github.com/finlib/finmc/blob/main/notebooks/heston.ipynb">Heston Notebook</a>)</p>
+<h1 id="plots-and-more">Plots and more</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="finmc.plots.impliedvol.plot_iv" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_iv</span><span class="p">(</span><span class="n">strikes</span><span class="p">,</span> <span class="n">expirations</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="n">atm_vols</span><span class="p">,</span> <span class="n">fwds</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Plot the implied volatility surface and forward curve.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>strikes</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The strike prices.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>expirations</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The expiration times.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>surface</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The implied volatility surface.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>atm_vols</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The ATM volatilities.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>fwds</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The forward prices</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_iv</span><span class="p">(</span><span class="n">strikes</span><span class="p">,</span> <span class="n">expirations</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="n">atm_vols</span><span class="p">,</span> <span class="n">fwds</span><span class="p">)</span>
+</span></code></pre></div>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><p><img alt="implied vol" src="../images/impliedvol.png" /></p>
+<p>(See <a href="https://github.com/finlib/finmc/blob/main/notebooks/heston.ipynb">Heston Notebook</a> for complete example)</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="finmc.plots.asset.plot_asset" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_asset</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">asset_name</span><span class="p">,</span> <span class="n">sample_idxs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">q_levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">))</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Plot the progression of an asset in a model.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>model</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="finmc.models.base.MCBase" href="../models/api/#finmc.models.base.MCBase">MCBase</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The model to use.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>asset_name</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name of the asset to plot.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>sample_idxs</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The indices of the sample paths to plot in the foreground. Defaults to the first three.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="numpy.arange">arange</span>(0, 3, 1)</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>q_levels</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The quantiles to show in the background. Defaults to 25 levels from 2% to 98%.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="numpy.linspace">linspace</span>(0.02, 0.98, 25)</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>times</code></td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The timesteps. Defaults to 1 year in 100 steps.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="numpy.linspace">linspace</span>(0, 1, 101)</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_asset</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;SPX&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><p><img alt="asset" src="../images/lv_mc.png" /></p>
 
 
 <div class="doc doc-object doc-module">
@@ -704,7 +1009,7 @@ This is useful for calibrating the model to Black-Scholes option prices.</p>
 
 
 <h2 id="finmc.calc.impliedvol.iv_surface_mc" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">iv_surface_mc</span><span class="p">(</span><span class="n">strikes</span><span class="p">,</span> <span class="n">expirations</span><span class="p">,</span> <span class="n">asset_name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">iv_surface_mc</span><span class="p">(</span><span class="n">strikes</span><span class="p">,</span> <span class="n">expirations</span><span class="p">,</span> <span class="n">asset_name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">is_log</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h2>
 
@@ -779,6 +1084,20 @@ This is useful for calibrating the model to Black-Scholes option prices.</p>
                 <em>required</em>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td><code>is_log</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>if True, the strikes are in log, i.e. log(K/F).</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
       </tbody>
     </table>
 
@@ -806,7 +1125,10 @@ This is useful for calibrating the model to Black-Scholes option prices.</p>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <p>surface, atm_vols, fwds = iv_surface_mc(Ks, Ts, "SPX", model)</p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">strikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2900</span><span class="p">,</span> <span class="mi">3100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">expirations</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">surface</span><span class="p">,</span> <span class="n">atm_vols</span><span class="p">,</span> <span class="n">fwds</span> <span class="o">=</span> <span class="n">iv_surface_mc</span><span class="p">(</span><span class="n">strikes</span><span class="p">,</span> <span class="n">expirations</span><span class="p">,</span> <span class="s2">&quot;SPX&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span></code></pre></div>
 
     </div>
 
