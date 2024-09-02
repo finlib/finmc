@@ -597,6 +597,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#mc-models-in-other-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      MC Models in other repos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#finmc.models.base.MCBase" class="md-nav__link">
     <span class="md-ellipsis">
       MCBase
@@ -675,15 +684,6 @@
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
       Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples-in-other-repos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples in other repos
     </span>
   </a>
   
@@ -732,6 +732,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#mc-models-in-other-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      MC Models in other repos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#finmc.models.base.MCBase" class="md-nav__link">
     <span class="md-ellipsis">
       MCBase
@@ -815,15 +824,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#examples-in-other-repos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples in other repos
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -840,8 +840,20 @@
 
 
 <h1 id="model-api">Model API</h1>
-<p>You can write your own models, that are compatible with the utils and calculators in this package, or elsewhere.
-All models must inherit the base class finmc.models.base.MCBase</p>
+<p>You can write your own models, that are compatible with the utils and calculators in this package.
+All models must inherit <code>finmc.models.base.MCBase</code>.</p>
+<h2 id="mc-models-in-other-repos">MC Models in other repos</h2>
+<p>These are implmentations of Monte-Carlo models in other repositories, using the <code>finmc</code> interface.</p>
+<p>Models using <code>MCFixedStep</code> as base</p>
+<ul>
+<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/localvol.py">Local Vol Model using SVI vols</a></li>
+<li><a href="https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb">Qablet Intro to Custom Models</a></li>
+<li><a href="https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py">Heston Almost Exact Simulation</a></li>
+</ul>
+<p>Models using <code>MCBase</code>:</p>
+<ul>
+<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py">Rough Bergomi Model</a></li>
+</ul>
 
 
 <div class="doc doc-object doc-module">
@@ -1079,16 +1091,6 @@ less than the TIMESTEP parameter.</p>
 </span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">discounter</span><span class="o">.</span><span class="n">discount</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_time</span><span class="p">)</span>
 </span></code></pre></div>
 <p>See <a href="https://github.com/finlib/finmc/blob/main/finmc/models/localvol.py">complete code of BSMC here</a></p>
-<h2 id="examples-in-other-repos">Examples in other repos</h2>
-<p>Examples using <code>MCFixedStep</code> as base</p>
-<ul>
-<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/localvol.py">Local Vol using SVI vols</a></li>
-<li><a href="https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb">Qablet Intro to Custom Models</a></li>
-</ul>
-<p>Examples using <code>MCBase</code>:</p>
-<ul>
-<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py">Rough Bergomi Model</a></li>
-</ul>
 
 
 
