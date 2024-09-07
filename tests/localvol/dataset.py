@@ -77,6 +77,7 @@ def data_lvmc_grid():
     model_cls, dataset, other = data_lvmc()
     dataset["BS"]["VOL"] = _interp(_bs_vol)
     dataset["LV"]["VOL"] = _interp(_local_vol)
+    dataset["MC"]["TIMESTEP"] = 1 / 250
 
     return model_cls, dataset, other
 
@@ -86,6 +87,7 @@ def data_lvmc_fn():
     model_cls, dataset, other = data_lvmc()
     dataset["BS"]["VOL"] = _bs_vol
     dataset["LV"]["VOL"] = _local_vol
+    dataset["MC"]["TIMESTEP"] = 1 / 250
 
     return model_cls, dataset, other
 

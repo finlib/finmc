@@ -7,7 +7,7 @@ This package contains Monte-Carlo implementations of many financial models deriv
  - [Shared utilities](https://finlib.github.io/finmc/utilities/) that can be used for all models for tasks such as calculating implied vol surface.
  - [Price Calculators](https://finlib.github.io/finmc/calculators/) that are model invariant.
  - The interace is designed for high performance, even with a large number of paths.
- - New models can be created outside this repositary, by indepedent contributors, and yet be compatible with above utilities and calculators.
+ - [New models](https://finlib.github.io/finmc/models/api/#mc-models-in-other-repos) can be created outside this repositary, by indepedent contributors, and yet be compatible with above utilities and calculators.
 
 See complete [documentation here.](https://finlib.github.io/finmc/)
 

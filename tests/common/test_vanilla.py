@@ -64,7 +64,7 @@ def test_call(data, maturity, strike_x):
         x = np.log(strike / spot)
         sigma = float(sigma((maturity_yrs, x)))
 
-    expected_price, _ = opt_price(
+    expected, _ = opt_price(
         strike,
         maturity_yrs,
         "Call",
@@ -72,10 +72,11 @@ def test_call(data, maturity, strike_x):
         df=df,
         sigma=sigma,
     )
-    error = (price - expected_price) / spot
-    # TODO feat: revisit the ATM Options at 0.10 maturity where error is high.
-    # It did not go down much even with MAX_X at 0.5, where dx = 0.002
-    assert error == approx(0.0, abs=1e-2)
+    error = (price - expected) / spot
+    assert error == approx(0.0, abs=1e-3)
+    print(
+        f"{maturity:3} {strike_x:6.2f}: {price:11.6f} {expected:11.6f} {error:9.6f}"
+    )
 
 
 if __name__ == "__main__":

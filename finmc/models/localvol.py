@@ -5,6 +5,7 @@ from numpy.random import SFC64, Generator
 
 from finmc.models.base import MCFixedStep
 from finmc.utils.assets import Discounter, Forwards
+from finmc.utils.mc import antithetic_normal
 
 
 # Define a single asset Black Scholes process with a flat volatility
@@ -24,6 +25,7 @@ class BSMC(MCFixedStep):
 
         # Initialize rng and any arrays
         self.rng = Generator(SFC64(self.dataset["MC"].get("SEED")))
+        self.dz_vec = np.empty(self.n, dtype=np.float64)
 
         self.x_vec = np.zeros(self.n)  # process x (log stock)
         self.cur_time = 0
@@ -34,8 +36,11 @@ class BSMC(MCFixedStep):
         dt = new_time - self.cur_time
         fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
 
-        dz_vec = self.rng.standard_normal(self.n) * sqrt(dt) * self.vol
-        self.x_vec += (fwd_rate - self.vol * self.vol / 2.0) * dt + dz_vec
+        antithetic_normal(
+            self.rng, self.n >> 1, self.vol * sqrt(dt), self.dz_vec
+        )
+
+        self.x_vec += (fwd_rate - self.vol * self.vol / 2.0) * dt + self.dz_vec
 
         self.cur_time = new_time
 
@@ -87,9 +92,8 @@ class LVMC(MCFixedStep):
         else:
             vol = self.vol
 
-        # # generate the random numbers and advance the log stock process
-        self.rng.standard_normal(self.n, out=self.dz_vec)
-        self.dz_vec *= sqrt(dt)
+        # generate the random numbers and advance the log stock process
+        antithetic_normal(self.rng, self.n >> 1, sqrt(dt), self.dz_vec)
         self.dz_vec *= vol
 
         # add drift to x_vec: (fwd_rate - vol * vol / 2.0) * dt

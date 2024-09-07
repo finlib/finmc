@@ -62,13 +62,12 @@ class HestonMC(MCFixedStep):
         # To improve preformance we will break up the operations into np.multiply,
         # np.add, etc. and use the `out` parameter to avoid creating temporary arrays.
 
-        # we calculate dz1 = normal(0,1) * sqrtdt
+        # calculate dz1 = normal(0,1) * sqrtdt
         antithetic_normal(self.rng, self.n, sqrtdt, self.dz1_vec)
 
-        # we calculate dz2 = normal(0,1) * sqrtdt * sqrt(1 - corr * corr) + corr * dz1
-        antithetic_normal(
-            self.rng, self.n, sqrtdt * sqrt(1 - corr * corr), self.dz2_vec
-        )
+        # calculate dz2 = normal(0,1) * sqrtdt * sqrt(1 - corr * corr) + corr * dz1
+        corr_comp = sqrtdt * sqrt(1 - corr * corr)
+        antithetic_normal(self.rng, self.n, corr_comp, self.dz2_vec)
         np.multiply(corr, self.dz1_vec, out=self.tmp_vec)  # second term
         np.add(self.dz2_vec, self.tmp_vec, out=self.dz2_vec)
 
