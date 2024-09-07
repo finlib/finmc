@@ -82,7 +82,8 @@ class LVMC(MCFixedStep):
         fwd = self.asset_fwd.forward(self.cur_time)
         logfwd_shift = np.log(fwd) - self.logspot
         if callable(self.vol):
-            vol = self.vol((self.cur_time, self.x_vec - logfwd_shift))
+            np.subtract(self.x_vec, logfwd_shift, out=self.tmp)
+            vol = self.vol((self.cur_time, self.tmp))
         else:
             vol = self.vol
 

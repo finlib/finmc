@@ -11,8 +11,7 @@ The `finmc` package contains Monte-Carlo implementations of many financial model
  - [Shared utilities](./utilities.md) can be used for all models for tasks such as calculating implied vol surface.
  - [Price Calculators](./calculators.md) can be model invariant.
  - The interace is designed for high performance, even with a large number of paths.
- - New models can be created outside this repositary, by indepedent contributors, and yet be compatible with above utilities and calculators.
-
+ - [New models](models/api.md/#mc-models-in-other-repos) can be created outside this repositary, by indepedent contributors, and yet be compatible with above utilities and calculators.
 
 ## Getting started.
 

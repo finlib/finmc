@@ -1,7 +1,22 @@
 # Model API
 
-You can write your own models, that are compatible with the utils and calculators in this package, or elsewhere.
-All models must inherit the base class finmc.models.base.MCBase
+You can write your own models, that are compatible with the utils and calculators in this package.
+All models must inherit `finmc.models.base.MCBase`.
+
+## MC Models in other repos
+
+These are implmentations of Monte-Carlo models in other repositories, using the `finmc` interface.
+
+Models using `MCFixedStep` as base
+
+- [Local Vol Model using SVI vols](https://github.com/qatwalk/eq/blob/main/src/model/localvol.py)
+- [Qablet Intro to Custom Models](https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb)
+- [Heston Almost Exact Simulation](https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py)
+
+Models using `MCBase`:
+
+- [Rough Bergomi Model](https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py)
+
 
 ::: finmc.models.base
 
@@ -41,14 +56,3 @@ class BSMC(MCFixedStep):
 
 See [complete code of BSMC here](https://github.com/finlib/finmc/blob/main/finmc/models/localvol.py)
 
-## Examples in other repos
-
-Examples using `MCFixedStep` as base
-
-- [Local Vol using SVI vols](https://github.com/qatwalk/eq/blob/main/src/model/localvol.py)
-- [Qablet Intro to Custom Models](https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb)
-
-
-Examples using `MCBase`:
-
-- [Rough Bergomi Model](https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py)

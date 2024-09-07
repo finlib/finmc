@@ -7,6 +7,7 @@ from numpy.random import SFC64, Generator
 
 from finmc.models.base import MCFixedStep
 from finmc.utils.assets import Discounter, Forwards
+from finmc.utils.mc import antithetic_normal
 
 
 # Define a class for the state of a single asset Heston MC process
@@ -57,25 +58,17 @@ class HestonMC(MCFixedStep):
         fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
 
         sqrtdt = sqrt(dt)
-        n = self.n
 
         # To improve preformance we will break up the operations into np.multiply,
         # np.add, etc. and use the `out` parameter to avoid creating temporary arrays.
 
-        # generate the random numbers with antithetic variates
         # we calculate dz1 = normal(0,1) * sqrtdt
-        self.rng.standard_normal(n, out=self.dz1_vec[0:n])
-        np.multiply(sqrtdt, self.dz1_vec[0:n], out=self.dz1_vec[0:n])
-        np.negative(self.dz1_vec[0:n], out=self.dz1_vec[n:])
+        antithetic_normal(self.rng, self.n, sqrtdt, self.dz1_vec)
 
         # we calculate dz2 = normal(0,1) * sqrtdt * sqrt(1 - corr * corr) + corr * dz1
-        self.rng.standard_normal(n, out=self.dz2_vec[0:n])
-        np.multiply(
-            sqrtdt * sqrt(1 - corr * corr),
-            self.dz2_vec[0:n],
-            out=self.dz2_vec[0:n],
+        antithetic_normal(
+            self.rng, self.n, sqrtdt * sqrt(1 - corr * corr), self.dz2_vec
         )
-        np.negative(self.dz2_vec[0:n], out=self.dz2_vec[n:])
         np.multiply(corr, self.dz1_vec, out=self.tmp_vec)  # second term
         np.add(self.dz2_vec, self.tmp_vec, out=self.dz2_vec)
 

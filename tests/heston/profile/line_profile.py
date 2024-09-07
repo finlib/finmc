@@ -9,7 +9,7 @@ from tests.heston.examples.option import run_model  # noqa: F401
 
 if __name__ == "__main__":
     # Create a LineProfiler object, specifying the methods to be profiled by line
-    lprofiler = LineProfiler(HestonMC.advance)
+    lprofiler = LineProfiler(HestonMC.step)
     # Wrap the entry function with the LineProfiler object, then run it.
     lp_wrapper = lprofiler(run_model)
     lp_wrapper()

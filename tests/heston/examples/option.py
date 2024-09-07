@@ -8,13 +8,14 @@ def run_model():
     """Price a vanilla option with the Heston MC model."""
 
     model_cls, dataset, other = data_heston_kruse()
+    spot = other["spot"]
 
-    # Create an option timetable with 1 month maturity
+    # Create an option timetable with 1 year maturity
 
     model = model_cls(dataset)
     price = opt_price_mc(
-        100,
-        1 / 12,
+        spot,
+        1,
         "Call",
         "EQ",
         model,
