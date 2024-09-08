@@ -43,7 +43,7 @@ class HestonMC(MCFixedStep):
         self.dz1_vec = np.empty(self.shape, dtype=np.float64)
         self.dz2_vec = np.empty(self.shape, dtype=np.float64)
         self.vol_vec = np.empty(self.shape, dtype=np.float64)
-        self.sv_vec = np.empty(self.shape, dtype=np.float64)
+        self.vplus_vec = np.empty(self.shape, dtype=np.float64)
 
         # Initialize the arrays
         self.x_vec = np.zeros(self.shape)  # processes x (log stock)
@@ -72,13 +72,12 @@ class HestonMC(MCFixedStep):
         np.add(self.dz2_vec, self.tmp_vec, out=self.dz2_vec)
 
         # vol = sqrt(max(v, 0))
-        np.maximum(0.0, self.v_vec, out=self.vol_vec)
-        np.sqrt(self.vol_vec, out=self.vol_vec)
+        np.maximum(0.0, self.v_vec, out=self.vplus_vec)
+        np.sqrt(self.vplus_vec, out=self.vol_vec)
 
         # update the current value of x (log Stock process)
         # first term: x += (fwd_rate - vol * vol / 2.) * dt
-        np.multiply(self.vol_vec, self.vol_vec, out=self.tmp_vec)
-        np.divide(self.tmp_vec, 2, out=self.tmp_vec)
+        np.divide(self.vplus_vec, 2, out=self.tmp_vec)
         np.subtract(fwd_rate, self.tmp_vec, out=self.tmp_vec)
         np.multiply(self.tmp_vec, dt, out=self.tmp_vec)
         np.add(self.x_vec, self.tmp_vec, out=self.x_vec)
@@ -96,17 +95,6 @@ class HestonMC(MCFixedStep):
         # second term: v += vvol * vol * dz2
         np.multiply(vvol, self.vol_vec, out=self.tmp_vec)
         np.multiply(self.tmp_vec, self.dz2_vec, out=self.tmp_vec)
-        np.add(self.v_vec, self.tmp_vec, out=self.v_vec)
-
-        # Millstein correction
-        # third term: v += 0.25 * vvol * vvol * (dz2 ** 2 - dt)
-        np.multiply(self.dz2_vec, self.dz2_vec, out=self.tmp_vec)
-        np.subtract(self.tmp_vec, dt, out=self.tmp_vec)
-        np.multiply(
-            0.25 * vvol * vvol,
-            self.tmp_vec,
-            out=self.tmp_vec,
-        )
         np.add(self.v_vec, self.tmp_vec, out=self.v_vec)
 
         self.cur_time = new_time

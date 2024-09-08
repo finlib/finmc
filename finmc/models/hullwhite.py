@@ -7,6 +7,7 @@ from numpy.random import SFC64, Generator
 
 from finmc.models.base import MCFixedStep
 from finmc.utils.assets import Discounter
+from finmc.utils.mc import antithetic_normal
 
 
 # Define a class for the state of a single asset HullWhite MC process
@@ -48,8 +49,9 @@ class HullWhiteMC(MCFixedStep):
         np.subtract(self.x_vec, self.tmp_vec, out=self.x_vec)
 
         # second term: x += vol * dW
-        self.rng.standard_normal(self.shape, out=self.tmp_vec)
-        np.multiply(sqrtdt * self.vol, self.tmp_vec, out=self.tmp_vec)
+        antithetic_normal(
+            self.rng, self.shape >> 1, sqrtdt * self.vol, self.tmp_vec
+        )
         np.add(self.x_vec, self.tmp_vec, out=self.x_vec)
 
         # r = x + alpha

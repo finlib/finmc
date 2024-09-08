@@ -53,7 +53,9 @@ def test_call(data, maturity, strike_x):
     error = (price - expected_price) / spot
     contract = f"Call {maturity:4.2f} {strike:6.0f}"
     assert error == approx(0.0, abs=1e-3)
-    print(f"{contract}: {price:11.6f} {expected_price:11.6f} {error:9.6f}")
+    print(
+        f"{contract}: {price:11.6f} {expected_price:11.6f} {error * 1e4:7.2f}"
+    )
 
 
 if __name__ == "__main__":
