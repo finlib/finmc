@@ -7,6 +7,7 @@ from pytest import approx
 
 from finmc.calc.bond import zcb_price_mc
 from finmc.utils.assets import Discounter
+from tests.heston.dataset import data_heston_kruse
 from tests.hullwhite.dataset import data_hwmc
 from tests.localvol.dataset import (
     data_bsmc,
@@ -14,7 +15,6 @@ from tests.localvol.dataset import (
     data_lvmc_fn,
     data_lvmc_grid,
 )
-from tests.heston.dataset import data_heston_kruse
 
 
 @pytest.fixture(

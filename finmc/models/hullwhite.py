@@ -13,7 +13,7 @@ from finmc.utils.mc import antithetic_normal
 # Define a class for the state of a single asset HullWhite MC process
 class HullWhiteMC(MCFixedStep):
     def reset(self):
-        self.shape = self.dataset["MC"]["PATHS"]
+        self.n = self.dataset["MC"]["PATHS"]
         self.timestep = self.dataset["MC"]["TIMESTEP"]
 
         # create a random number generator
@@ -26,12 +26,12 @@ class HullWhiteMC(MCFixedStep):
         self.vol = self.dataset["HW"]["VOL"]
 
         # We will reduce time spent in memory allocation by creating a tmp arrays
-        self.tmp_vec = np.empty(self.shape, dtype=np.float64)
+        self.tmp_vec = np.empty(self.n, dtype=np.float64)
 
         # Initialize the arrays for the processes
-        self.x_vec = np.zeros(self.shape, dtype=np.float64)  # x
-        self.r_vec = np.zeros(self.shape, dtype=np.float64)  # r (short rate)
-        self.df_vec = np.ones(self.shape, dtype=np.float64)  # discount factors
+        self.x_vec = np.zeros(self.n, dtype=np.float64)  # x
+        self.r_vec = np.zeros(self.n, dtype=np.float64)  # r (short rate)
+        self.df_vec = np.ones(self.n, dtype=np.float64)  # discount factors
         fwd_rate = self.asset_fwd.rate(self.timestep, 0)
         np.add(self.x_vec, fwd_rate, out=self.r_vec)
 
@@ -49,9 +49,7 @@ class HullWhiteMC(MCFixedStep):
         np.subtract(self.x_vec, self.tmp_vec, out=self.x_vec)
 
         # second term: x += vol * dW
-        antithetic_normal(
-            self.rng, self.shape >> 1, sqrtdt * self.vol, self.tmp_vec
-        )
+        antithetic_normal(self.rng, self.n, sqrtdt * self.vol, self.tmp_vec)
         np.add(self.x_vec, self.tmp_vec, out=self.x_vec)
 
         # r = x + alpha

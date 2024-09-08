@@ -15,7 +15,6 @@ from tests.localvol.dataset import (
     data_lvmc_fn,
     data_lvmc_grid,
 )
-from tests.heston.dataset import data_heston_kruse
 
 
 # datasets for all models that can price a vanilla option.
@@ -25,7 +24,6 @@ from tests.heston.dataset import data_heston_kruse
         data_lvmc,
         data_lvmc_fn,
         data_lvmc_grid,
-        data_heston_kruse,
     ]
 )
 def data(request):

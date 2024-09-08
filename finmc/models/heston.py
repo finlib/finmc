@@ -13,9 +13,7 @@ from finmc.utils.mc import antithetic_normal
 # Define a class for the state of a single asset Heston MC process
 class HestonMC(MCFixedStep):
     def reset(self):
-        self.shape = self.dataset["MC"]["PATHS"]
-        assert self.shape % 2 == 0, "Number of paths must be even"
-        self.n = self.shape >> 1  # divide by 2
+        self.n = self.dataset["MC"]["PATHS"]
         self.timestep = self.dataset["MC"]["TIMESTEP"]
 
         # create a random number generator
@@ -39,15 +37,15 @@ class HestonMC(MCFixedStep):
         # We will reduce time spent in memory allocation by creating arrays in advance
         # and reusing them in the `advance` function which is called repeatedly.
         # though the values from one timestep are not reused in the next.
-        self.tmp_vec = np.empty(self.shape, dtype=np.float64)
-        self.dz1_vec = np.empty(self.shape, dtype=np.float64)
-        self.dz2_vec = np.empty(self.shape, dtype=np.float64)
-        self.vol_vec = np.empty(self.shape, dtype=np.float64)
-        self.vplus_vec = np.empty(self.shape, dtype=np.float64)
+        self.tmp_vec = np.empty(self.n, dtype=np.float64)
+        self.dz1_vec = np.empty(self.n, dtype=np.float64)
+        self.dz2_vec = np.empty(self.n, dtype=np.float64)
+        self.vol_vec = np.empty(self.n, dtype=np.float64)
+        self.vplus_vec = np.empty(self.n, dtype=np.float64)
 
         # Initialize the arrays
-        self.x_vec = np.zeros(self.shape)  # processes x (log stock)
-        self.v_vec = np.full(self.shape, self.v0)  # processes v (variance)
+        self.x_vec = np.zeros(self.n)  # processes x (log stock)
+        self.v_vec = np.full(self.n, self.v0)  # processes v (variance)
         self.cur_time = 0
 
     def step(self, new_time):

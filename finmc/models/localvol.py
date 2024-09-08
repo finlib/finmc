@@ -36,9 +36,7 @@ class BSMC(MCFixedStep):
         dt = new_time - self.cur_time
         fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
 
-        antithetic_normal(
-            self.rng, self.n >> 1, self.vol * sqrt(dt), self.dz_vec
-        )
+        antithetic_normal(self.rng, self.n, self.vol * sqrt(dt), self.dz_vec)
 
         self.x_vec += (fwd_rate - self.vol * self.vol / 2.0) * dt + self.dz_vec
 
@@ -93,7 +91,7 @@ class LVMC(MCFixedStep):
             vol = self.vol
 
         # generate the random numbers and advance the log stock process
-        antithetic_normal(self.rng, self.n >> 1, sqrt(dt), self.dz_vec)
+        antithetic_normal(self.rng, self.n, sqrt(dt), self.dz_vec)
         self.dz_vec *= vol
 
         # add drift to x_vec: (fwd_rate - vol * vol / 2.0) * dt

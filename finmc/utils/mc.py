@@ -10,28 +10,31 @@ def antithetic_normal(rng, n, scale, out):
 
     Args:
         rng: a random number generator.
-        n: the number of random numbers to generate.
+        n: the number of samples to generate (must be even).
         scale: scaling factor to apply.
-        out: the destination array of size 2n.
+        out: the destination array of size n.
 
     Example:
         >>> rng = np.random.default_rng()
-        >>> n = 5
-        >>> out = np.empty(2 * n, dtype=np.float64)
-        >>> antithetic_normal(rng, n, 10.0, out)
+        >>> n = 10
+        >>> out = np.empty(n, dtype=np.float64)
+        >>> antithetic_normal(rng, n, 100.0, out)
         >>> print(out)
-        [-26.92756586   9.72017449 -11.28828596  -7.71927495  -3.78729135
-        26.92756586  -9.72017449  11.28828596   7.71927495   3.78729135]
+        [ -3.81721881   3.43045846 -25.60449457  90.48543061 -12.57430504
+        3.81721881  -3.43045846  25.60449457 -90.48543061  12.57430504]
 
     """
-    rng.standard_normal(n, out=out[0:n])
-    np.multiply(scale, out[0:n], out=out[0:n])
-    np.negative(out[0:n], out=out[n:])
+
+    assert n % 2 == 0, "Number of paths must be even"
+    h = n >> 1  # divide by 2
+    rng.standard_normal(h, out=out[0:h])
+    np.multiply(scale, out[0:h], out=out[0:h])
+    np.negative(out[0:h], out=out[h:])
 
 
 if __name__ == "__main__":
     rng = np.random.default_rng()
-    n = 5
-    out = np.empty(2 * n, dtype=np.float64)
-    antithetic_normal(rng, n, 10.0, out)
+    n = 10
+    out = np.empty(n, dtype=np.float64)
+    antithetic_normal(rng, n, 100.0, out)
     print(out)
