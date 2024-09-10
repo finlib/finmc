@@ -433,17 +433,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Calculators
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -453,43 +442,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#finmc.calc.option.opt_price_mc" class="md-nav__link">
-    <span class="md-ellipsis">
-      opt_price_mc
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#finmc.calc.bond.zcb_price_mc" class="md-nav__link">
-    <span class="md-ellipsis">
-      zcb_price_mc
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -652,32 +604,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#finmc.calc.option.opt_price_mc" class="md-nav__link">
-    <span class="md-ellipsis">
-      opt_price_mc
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#finmc.calc.bond.zcb_price_mc" class="md-nav__link">
-    <span class="md-ellipsis">
-      zcb_price_mc
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -692,8 +618,14 @@
 
 
 <h1 id="calculators">Calculators</h1>
-<p>This module contains shared calculators that can be used for all models,
-for calculations such as the price of vanilla options.</p>
+<ul>
+<li>In this package: <code>finmc.calc</code> contains calculators that can be used with any <code>finmc</code> model.</li>
+<li>Outside this package: <a href="https://qablet.github.io/qablet-contracts/">qablet-contracts</a> defines a large selection of
+financial derivative contracts that can be priced using <code>finmc</code> models.
+Also see <a href="https://github.com/qatwalk/eq/blob/main/README.md">project qatwalk</a> that leverages the selection
+of contracts in <code>qablet-contract</code> with the selection of models in <code>finmc</code>.</li>
+</ul>
+<h1 id="finmccalc"><code>finmc.calc</code></h1>
 
 
 <div class="doc doc-object doc-module">
@@ -721,7 +653,7 @@ for calculations such as the price of vanilla options.</p>
 
 
 <h2 id="finmc.calc.option.opt_price_mc" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">opt_price_mc</span><span class="p">(</span><span class="n">strike</span><span class="p">,</span> <span class="n">maturity</span><span class="p">,</span> <span class="n">option_type</span><span class="p">,</span> <span class="n">asset_name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">finmc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">opt_price_mc</span></code>
 
 </h2>
 
@@ -880,7 +812,7 @@ for calculations such as the price of vanilla options.</p>
 
 
 <h2 id="finmc.calc.bond.zcb_price_mc" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">zcb_price_mc</span><span class="p">(</span><span class="n">maturity</span><span class="p">,</span> <span class="n">asset_name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">finmc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">bond</span><span class="o">.</span><span class="n">zcb_price_mc</span></code>
 
 </h2>
 
