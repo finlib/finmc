@@ -21,7 +21,6 @@ class HestonMC(MCFixedStep):
 
         self.asset = self.dataset["HESTON"]["ASSET"]
         self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
-        self.spot = self.asset_fwd.forward(0)
         self.discounter = Discounter(
             self.dataset["ASSETS"][self.dataset["BASE"]]
         )
@@ -53,8 +52,6 @@ class HestonMC(MCFixedStep):
         dt = new_time - self.cur_time
 
         (theta, vvol, meanrev, corr) = self.heston_params
-        fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
-
         sqrtdt = sqrt(dt)
 
         # To improve preformance we will break up the operations into np.multiply,
@@ -74,11 +71,10 @@ class HestonMC(MCFixedStep):
         np.sqrt(self.vplus_vec, out=self.vol_vec)
 
         # update the current value of x (log Stock process)
-        # first term: x += (fwd_rate - vol * vol / 2.) * dt
+        # first term: x -= vol * vol * dt/2
         np.divide(self.vplus_vec, 2, out=self.tmp_vec)
-        np.subtract(fwd_rate, self.tmp_vec, out=self.tmp_vec)
         np.multiply(self.tmp_vec, dt, out=self.tmp_vec)
-        np.add(self.x_vec, self.tmp_vec, out=self.x_vec)
+        np.subtract(self.x_vec, self.tmp_vec, out=self.x_vec)
 
         # second term: x += vol * dz1
         np.multiply(self.vol_vec, self.dz1_vec, out=self.tmp_vec)
@@ -100,7 +96,7 @@ class HestonMC(MCFixedStep):
     def get_value(self, unit):
         """Return the value of the unit at the current time."""
         if unit == self.asset:
-            return self.spot * np.exp(self.x_vec)
+            return self.asset_fwd.forward(self.cur_time) * np.exp(self.x_vec)
 
     def get_df(self):
         return self.discounter.discount(self.cur_time)

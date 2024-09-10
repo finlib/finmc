@@ -75,7 +75,7 @@ def test_call(data, maturity, strike_x):
     error = (price - expected) / spot
     assert error == approx(0.0, abs=1e-3)
     print(
-        f"{maturity:3} {strike_x:6.2f}: {price:11.6f} {expected:11.6f} {error:9.6f}"
+        f"{maturity:3} {strike_x:6.2f}: {price:11.6f} {expected:11.6f} {error * 1e4:7.2f}"
     )
 
 

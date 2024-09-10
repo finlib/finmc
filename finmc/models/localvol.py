@@ -17,7 +17,6 @@ class BSMC(MCFixedStep):
 
         self.asset = self.dataset["LV"]["ASSET"]
         self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
-        self.spot = self.asset_fwd.forward(0)
         self.vol = self.dataset["BS"]["VOL"]
         self.discounter = Discounter(
             self.dataset["ASSETS"][self.dataset["BASE"]]
@@ -34,18 +33,17 @@ class BSMC(MCFixedStep):
         """Update x_vec in place when we move simulation by time dt."""
 
         dt = new_time - self.cur_time
-        fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
 
         antithetic_normal(self.rng, self.n, self.vol * sqrt(dt), self.dz_vec)
 
-        self.x_vec += (fwd_rate - self.vol * self.vol / 2.0) * dt + self.dz_vec
+        self.x_vec += (-self.vol * self.vol / 2.0) * dt + self.dz_vec
 
         self.cur_time = new_time
 
     def get_value(self, unit):
         """Return the value of the modeled asset at the current time."""
         if unit == self.asset:
-            return self.spot * np.exp(self.x_vec)
+            return self.asset_fwd.forward(self.cur_time) * np.exp(self.x_vec)
 
     def get_df(self):
         return self.discounter.discount(self.cur_time)
@@ -60,9 +58,7 @@ class LVMC(MCFixedStep):
 
         self.asset = self.dataset["LV"]["ASSET"]
         self.asset_fwd = Forwards(self.dataset["ASSETS"][self.asset])
-        self.spot = self.asset_fwd.forward(0)
         self.vol = self.dataset["LV"]["VOL"]
-        self.logspot = np.log(self.spot)
         self.discounter = Discounter(
             self.dataset["ASSETS"][self.dataset["BASE"]]
         )
@@ -81,12 +77,8 @@ class LVMC(MCFixedStep):
 
         dt = new_time - self.cur_time
 
-        fwd_rate = self.asset_fwd.rate(new_time, self.cur_time)
-        fwd = self.asset_fwd.forward(self.cur_time)
-        logfwd_shift = np.log(fwd) - self.logspot
         if callable(self.vol):
-            np.subtract(self.x_vec, logfwd_shift, out=self.tmp)
-            vol = self.vol((self.cur_time, self.tmp))
+            vol = self.vol((self.cur_time, self.x_vec))
         else:
             vol = self.vol
 
@@ -94,10 +86,9 @@ class LVMC(MCFixedStep):
         antithetic_normal(self.rng, self.n, sqrt(dt), self.dz_vec)
         self.dz_vec *= vol
 
-        # add drift to x_vec: (fwd_rate - vol * vol / 2.0) * dt
+        # add drift to x_vec: - vol * vol * dt/ 2.0
         np.multiply(vol, vol, out=self.tmp)
         self.tmp *= -0.5 * dt
-        self.tmp += fwd_rate * dt
         self.x_vec += self.tmp
         # add the random part to x_vec
         self.x_vec += self.dz_vec
@@ -107,7 +98,8 @@ class LVMC(MCFixedStep):
     def get_value(self, unit):
         """Return the value of the modeled asset at the current time."""
         if unit == self.asset:
-            return self.spot * np.exp(self.x_vec)
+            return self.asset_fwd.forward(self.cur_time) * np.exp(self.x_vec)
 
     def get_df(self):
+        """Return the discount factors at the current time."""
         return self.discounter.discount(self.cur_time)

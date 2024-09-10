@@ -1,9 +1,37 @@
 # Description: datasets for the LV MC and BS FD model.
 
 import numpy as np
-from scipy.interpolate import RegularGridInterpolator
 
 from finmc.models.localvol import BSMC, LVMC
+
+
+def _create_interp_two_step(times, strikes, vols):
+    t_len = len(times)
+
+    def interp(args):
+        t, x_vec = args
+        i_left = np.searchsorted(times, t, side="left")
+        i_right = np.searchsorted(times, t, side="right")
+
+        if i_left == i_right:
+            if i_right == 0:
+                y = vols[0]
+            elif i_right == t_len:
+                y = vols[-1]
+            else:
+                i_left -= 1
+                t_right = times[i_right]
+                t_left = times[i_left]
+                den = t_right - t_left
+                y = (
+                    vols[i_left]
+                    + (vols[i_right] - vols[i_left]) * (t - t_left) / den
+                )
+        else:
+            y = vols[i_left]
+        return np.interp(x_vec, strikes, y)
+
+    return interp
 
 
 # Description: datasets for the LVMC model.
@@ -31,9 +59,7 @@ def _interp(volfn):
     vi = np.zeros((num_t, num_x))
     for i in range(num_t):
         vi[i, :] = volfn((times[i], strikes))
-    return RegularGridInterpolator(
-        (times, strikes), vi, fill_value=None, bounds_error=False
-    )
+    return _create_interp_two_step(times, strikes, vi)
 
 
 def data_lvmc():

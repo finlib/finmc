@@ -13,6 +13,7 @@ def run_model(type="grid"):
 
     spot = other["spot"]
     strike = spot
+    maturity = 1
 
     asset_name = dataset["LV"]["ASSET"]
 
@@ -20,7 +21,7 @@ def run_model(type="grid"):
     model = model_cls(dataset)
     price = opt_price_mc(
         strike,
-        1 / 12,
+        maturity,
         "Call",
         asset_name,
         model,

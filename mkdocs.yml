@@ -47,6 +47,8 @@ plugins:
             show_root_toc_entry: false
             show_source: false
             show_bases: false
+            show_object_full_path: true
+            show_signature: false
 
 # extra_css:
 #   - stylesheets/extra.css

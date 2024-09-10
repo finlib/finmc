@@ -2,22 +2,21 @@
 
 ![rate_plot](./images/rates.png)
 
-You can describe the base asset using a two-column (N X 2) numpy array, where the first column is time, and the second represents **term zero rates**, e.g.
-
-```
-[[1.   0.05]
- [2.   0.045]
- [5.   0.04]]
-```
-
+You can describe the base asset using a two-column (N X 2) numpy array, where the first column is time, and the second represents **term zero rates**.
 It can be created like
 
 ```python
-discount_data = ("ZERO_RATES", np.array([
-    [1.0, 0.05],
-    [2.0, 0.045]
-    [5.0, 0.04]
-    ]))
+discount_data = (
+    "ZERO_RATES",
+    np.array(
+        [
+            [1.0, 0.05],
+            [2.0, 0.045],
+            [5.0, 0.04],
+        ]
+    ),
+)
+
 
 dataset = {
     "BASE": "USD",
