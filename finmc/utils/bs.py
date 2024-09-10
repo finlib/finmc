@@ -96,5 +96,41 @@ def digital_price(
     return price, {}
 
 
+def dupire_local_var(dt: float, dk: float, k, w_vec_prev, w_vec):
+    """Calculate local variance (vol**2) from t0 to t1, given an array of strikes k, uniformly spaced by dk,
+    and the total variances (w = T * vol**2) at time t0 and t1.
+    The vectors k, w_vec_prev, and w_vec must be of the same length.
+    The returned vector is two elements shorter.
+
+    Args:
+        dt: time step, i.e. t1 - t0.
+        dk: strike step
+        k: np array of log strikes, uniformly spaced by dk
+        w_vec_prev: np array of total variance at time t0
+        w_vec: np array total variance at time t1
+
+    """
+
+    w = (w_vec + w_vec_prev) / 2
+    # time derivative of w
+    wt = (w_vec - w_vec_prev) / dt
+
+    # strike derivatives of w
+    wk = (w[2:] - w[:-2]) / (2 * dk)
+    wkk = (w[2:] + w[:-2] - 2 * w[1:-1]) / (dk**2)
+
+    # drop the extra points at top and bottom
+    w_ = w[1:-1]
+    wt_ = wt[1:-1]
+
+    # apply Dupire's formula
+    return wt_ / (
+        1
+        - k / w_ * wk
+        + 1 / 4 * (-1 / 4 - 1 / w_ + k**2 / w_**2) * (wk) ** 2
+        + 1 / 2 * wkk
+    )
+
+
 if __name__ == "__main__":
     iv = impliedvol(8.58, 5508.3, 6400, 0.0833, True)
