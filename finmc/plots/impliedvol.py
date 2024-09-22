@@ -3,18 +3,16 @@ import numpy as np
 from matplotlib import cm
 
 
-def plot_iv(strikes, expirations, surface, atm_vols, fwds):
+def plot_iv(strikes, expirations, surface):
     """Plot the implied volatility surface and forward curve.
 
     Args:
         strikes (np.array): The strike prices.
         expirations (np.array): The expiration times.
         surface (np.array): The implied volatility surface.
-        atm_vols (np.array): The ATM volatilities.
-        fwds (np.array): The forward prices
 
     Examples:
-        >>> plot_iv(strikes, expirations, surface, atm_vols, fwds)
+        >>> plot_iv(strikes, expirations, surface)
     """
 
     X, Y = np.meshgrid(strikes, expirations)
@@ -36,6 +34,18 @@ def plot_iv(strikes, expirations, surface, atm_vols, fwds):
     ax.set_xlabel("Strike (K)")
     ax.set_ylabel("Maturity (years)")
     plt.show()
+
+
+def plot_atmvols(expirations, atm_vols):
+    """Plot the implied volatility surface and forward curve.
+
+    Args:
+        expirations (np.array): The expiration times.
+        atm_vols (np.array): The ATM volatilities.
+
+    Examples:
+        >>> plot_atmvols(expirations, atm_vols)
+    """
 
     # Add atm vol curve
     fig, ax = plt.subplots(figsize=(5, 2))

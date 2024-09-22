@@ -47,18 +47,16 @@ def iv_surface_mc(
         is_log: if True, the strikes are in log, i.e. log(K/F).
 
     Returns:
-        A tuple containing the implied volatility surface, the ATM volatilities, and the forward prices.
+        The implied volatility surface as a 2D numpy array with a row for each strike and a column for each expiration.
 
     Examples:
         >>> strikes = np.linspace(2900, 3100, 3)
         >>> expirations = [0.25, 0.5, 1]
-        >>> surface, atm_vols, fwds = iv_surface_mc(strikes, expirations, "SPX", model)
+        >>> surface = iv_surface_mc(strikes, expirations, "SPX", model)
     """
 
     iv_mat = np.zeros((len(expirations), len(strikes)))
 
-    iv_atm = []
-    fwds = []
     model.reset()
     for i, exp in enumerate(expirations):
         model.advance(exp)
@@ -70,13 +68,44 @@ def iv_surface_mc(
             iv_mat[i, :] = _iv_strike(spots, fwd * np.exp(strikes), fwd, exp)
         else:
             iv_mat[i, :] = _iv_strike(spots, strikes, fwd, exp)
+    return iv_mat
+
+
+def atmvols_mc(
+    expirations,  # in years, increasing order
+    asset_name: str,
+    model: MCBase,
+):
+    """Calculate the atmvols using MC Simulation.
+
+    Args:
+        expirations: The expirations of the options in years.
+        asset_name: The name of the asset.
+        model: The model used to simulate the asset price.
+
+    Returns:
+        A tuple containing the ATM volatilities, and the forward prices.
+
+    Examples:
+        >>> strikes = np.linspace(2900, 3100, 3)
+        >>> expirations = [0.25, 0.5, 1]
+        >>> atm_vols, fwds = atmvols_mc(expirations, "SPX", model)
+    """
+
+    iv_atm = []
+    fwds = []
+    model.reset()
+    for i, exp in enumerate(expirations):
+        model.advance(exp)
+        spots = model.get_value(asset_name)
+        fwd = spots.mean()
 
         # calculate atm vols
         atm_call = np.maximum(spots - fwd, 0).mean()
         # calculate implied vols and fwds
         fwds.append(fwd)
         iv_atm.append(impliedvol(atm_call, fwd, fwd, exp, True))
-    return iv_mat, np.array(iv_atm), np.array(fwds)
+    return np.array(iv_atm), np.array(fwds)
 
 
 if __name__ == "__main__":
@@ -102,7 +131,7 @@ if __name__ == "__main__":
     model = LVMC(dataset)
     strikes = np.linspace(2900, 3100, 3)
     expirations = [1 / 12, 1 / 6, 1 / 4, 1 / 2, 1]
-    surface, atm_vols, fwds = iv_surface_mc(
+    surface = iv_surface_mc(
         strikes,
         expirations,
         asset_name="SPX",
@@ -111,5 +140,12 @@ if __name__ == "__main__":
     # print the surface as a DataFrame
     df = pd.DataFrame(surface, columns=strikes, index=expirations)
     print(f"surface:\n{df}")
+
+    atm_vols, fwds = atmvols_mc(
+        expirations,
+        asset_name="SPX",
+        model=model,
+    )
+
     print(f"atm_vols:\n{atm_vols}")
     print(f"fwds:\n{fwds}")
