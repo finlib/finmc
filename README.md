@@ -11,8 +11,12 @@ This package contains Monte-Carlo implementations of many financial models deriv
 
 See complete [documentation here.](https://finlib.github.io/finmc/)
 
-<img src="https://finlib.github.io/finmc/images/blank_mc.png"/>
-
+<table>
+<tr>
+<td> <img src="https://finlib.github.io/finmc/images/blank_mc.png"/> </td>
+<td> <img src="https://finlib.github.io/finmc/images/heston_vol_mc.png" alt="forward collar"/> </td>
+</tr>
+</table>
 
 ## Install it from PyPI
 

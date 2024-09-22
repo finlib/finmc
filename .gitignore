@@ -130,6 +130,6 @@ dmypy.json
 
 # templates
 .github/templates/*
-
+restats
 .vscode
 scratch/

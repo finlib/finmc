@@ -70,4 +70,5 @@ nav:
     - 'models/heston.md'
     - 'models/hullwhite.md'
     - 'models/localvol.md'
+    - 'models/bsm.md'
     - 'models/api.md'
