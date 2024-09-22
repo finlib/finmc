@@ -1,7 +1,7 @@
 # Description: Run Heston MC model with a vanilla option contract.
 
 from tests.multi.dataset import data_three_asset
-from tests.multi.test_basket import _basket_price_mc
+from tests.multi.tests.test_basket import _basket_price_mc
 
 
 def run_model():
