@@ -10,6 +10,7 @@ class MCBase(ABC):
 
     def __init__(self, dataset: dict) -> None:
         self.dataset = dataset
+        self.reset()
 
     @abstractmethod
     def reset(self):
