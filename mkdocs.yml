@@ -4,7 +4,7 @@ theme:
   palette:
     # Palette toggle for dark mode
     - scheme: slate
-      primary: deep orange
+      primary: deep purple
 
       toggle:
         icon: material/brightness-4
@@ -12,13 +12,13 @@ theme:
 
     # Palette toggle for light mode
     - scheme: default
-      primary: deep orange
+      primary: blue grey
 
       toggle:
         icon: material/brightness-7 
         name: Switch to dark mode
 
-
+  logo: images/dice-512.png
   features:
     - navigation.tabs
 
@@ -45,7 +45,6 @@ plugins:
           options:
             members_order: source
             show_root_toc_entry: false
-            show_source: false
             show_bases: false
             show_object_full_path: true
             show_signature: false
