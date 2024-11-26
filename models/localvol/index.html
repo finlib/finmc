@@ -576,9 +576,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
+  <a href="#model-dynamics" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Model Dynamics
     </span>
   </a>
   
@@ -613,15 +613,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#vol-function" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vol Function
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vol-interpolator" class="md-nav__link">
     <span class="md-ellipsis">
       Vol Interpolator
@@ -630,8 +621,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vol-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vol Function
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
   
 </li>
       
@@ -720,9 +729,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
+  <a href="#model-dynamics" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Model Dynamics
     </span>
   </a>
   
@@ -757,15 +766,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#vol-function" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vol Function
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vol-interpolator" class="md-nav__link">
     <span class="md-ellipsis">
       Vol Interpolator
@@ -774,8 +774,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vol-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vol Function
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
   
 </li>
       
@@ -798,7 +816,9 @@
 <figure>
 <p><img alt="Simulation" src="../../images/lv_mc.png" /></p>
 </figure>
-<h3 id="model">Model</h3>
+<p>The Local Volatility Model is an extension of the Black-Scholes model, where volatility is not constant but instead is assumed to be a function of the asset's current price and time. Using Dupire's method, this function, known as local volatility, can be calibrated from the implied volatility surface observed in the market.
+It is used for equity options, FX options, and commodity derivatives.</p>
+<h3 id="model-dynamics">Model Dynamics</h3>
 <p>In the Local Vol model the lognormal stock process <span class="arithmatex">\(X_t\)</span> is given by,</p>
 <div class="arithmatex">\[
 dX_t = (\mu - \frac{\sigma_t^2}{2}) dt + \sigma_t dW_s
@@ -831,37 +851,40 @@ dX_t = (\mu - \frac{\sigma_t^2}{2}) dt + \sigma_t dW_s
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">model</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">spots</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;SPX&quot;</span><span class="p">)</span>
 </span></code></pre></div>
-<h4 id="vol-function">Vol Function</h4>
-<p><code>VOL</code> can be a function as shown below.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">volfn</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># t is float, x_vec is a np array</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">)</span> <span class="o">=</span> <span class="n">points</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">at</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">.01</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">atm</span> <span class="o">=</span> <span class="mf">0.04</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">at</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">skew</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">at</span><span class="p">))</span> <span class="o">/</span> <span class="n">at</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">atm</span> <span class="o">+</span> <span class="n">x_vec</span> <span class="o">*</span> <span class="n">skew</span><span class="p">))</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">lv_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ASSET&quot;</span><span class="p">:</span> <span class="s2">&quot;SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;VOL&quot;</span><span class="p">:</span> <span class="n">volfn</span><span class="p">}</span>
-</span></code></pre></div>
 <h4 id="vol-interpolator">Vol Interpolator</h4>
-<p><code>VOL</code> can be an interpolator as below</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RegularGridInterpolator</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">strikes</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">vols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="p">[</span><span class="mf">2.713</span><span class="p">,</span> <span class="mf">0.884</span><span class="p">,</span> <span class="mf">0.442</span><span class="p">,</span> <span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">],</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="p">[</span><span class="mf">2.187</span><span class="p">,</span> <span class="mf">0.719</span><span class="p">,</span> <span class="mf">0.372</span><span class="p">,</span> <span class="mf">0.209</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">],</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">[</span><span class="mf">1.237</span><span class="p">,</span> <span class="mf">0.435</span><span class="p">,</span> <span class="mf">0.264</span><span class="p">,</span> <span class="mf">0.200</span><span class="p">,</span> <span class="mf">0.101</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">]</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">])</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">volinterp</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">(</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">strikes</span><span class="p">),</span> <span class="n">vols</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">)</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">lv_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ASSET&quot;</span><span class="p">:</span> <span class="s2">&quot;SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;VOL&quot;</span><span class="p">:</span> <span class="n">volinterp</span><span class="p">}</span>
+<p><code>VOL</code> can be specified using a 2D-array, vs time and strike,
+using an interpolator as below</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RegularGridInterpolator</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">strikes</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">vols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">[</span><span class="mf">2.713</span><span class="p">,</span> <span class="mf">0.884</span><span class="p">,</span> <span class="mf">0.442</span><span class="p">,</span> <span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">],</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">[</span><span class="mf">2.187</span><span class="p">,</span> <span class="mf">0.719</span><span class="p">,</span> <span class="mf">0.372</span><span class="p">,</span> <span class="mf">0.209</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">],</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="p">[</span><span class="mf">1.237</span><span class="p">,</span> <span class="mf">0.435</span><span class="p">,</span> <span class="mf">0.264</span><span class="p">,</span> <span class="mf">0.200</span><span class="p">,</span> <span class="mf">0.101</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">,</span> <span class="mf">0.032</span><span class="p">]</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">])</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">volinterp</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">(</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">strikes</span><span class="p">),</span> <span class="n">vols</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">)</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">lv_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ASSET&quot;</span><span class="p">:</span> <span class="s2">&quot;SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;VOL&quot;</span><span class="p">:</span> <span class="n">volinterp</span><span class="p">}</span>
 </span></code></pre></div>
+<h4 id="vol-function">Vol Function</h4>
+<p>Alternatively, <code>VOL</code> can be specified as an arbitrary function, where the arg is a tuple of
+time (float) and log stock (1D-array)</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">volfn</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># t is float, x_vec is a np array</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_vec</span><span class="p">)</span> <span class="o">=</span> <span class="n">points</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">at</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">.01</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">atm</span> <span class="o">=</span> <span class="mf">0.04</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">at</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">skew</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">at</span><span class="p">))</span> <span class="o">/</span> <span class="n">at</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">atm</span> <span class="o">+</span> <span class="n">x_vec</span> <span class="o">*</span> <span class="n">skew</span><span class="p">))</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">lv_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ASSET&quot;</span><span class="p">:</span> <span class="s2">&quot;SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;VOL&quot;</span><span class="p">:</span> <span class="n">volfn</span><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="example">Example</h3>
 <p>See <a href="https://github.com/finlib/finmc/blob/main/notebooks/localvol.ipynb">complete example here</a></p>
 
 

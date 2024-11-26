@@ -862,16 +862,20 @@
 <p>You can write your own models, that are compatible with the utils and calculators in this package.
 All models must inherit <code>finmc.models.base.MCBase</code>.</p>
 <h2 id="mc-models-in-other-repos">MC Models in other repos</h2>
-<p>These are implmentations of Monte-Carlo models in other repositories, using the <code>finmc</code> interface.</p>
+<p>These are implementations of Monte-Carlo models in other repositories, using the <code>finmc</code> interface.</p>
 <p>Models using <code>MCFixedStep</code> as base</p>
 <ul>
-<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/localvol.py">Local Vol Model using SVI vols</a></li>
-<li><a href="https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb">Qablet Intro to Custom Models</a></li>
-<li><a href="https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py">Heston Almost Exact Simulation</a></li>
+<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/localvol.py">Local Vol Model using SVI vols</a> :
+a local vol model that calibrates on-the-fly from an SVI parameterized volatility surface. </li>
+<li><a href="https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb">Qablet Intro to Custom Models</a>:
+a step by step tutorial to write a Black-Scholes model using finmc interface.</li>
+<li><a href="https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py">Heston Almost Exact Simulation</a>:
+variations of the Heston model.</li>
 </ul>
 <p>Models using <code>MCBase</code>:</p>
 <ul>
-<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py">Rough Bergomi Model</a></li>
+<li><a href="https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py">Rough Bergomi Model</a>:
+implementation of a Rough Bergomi model using a hybrid scheme for the Brownian semistationary processes.</li>
 </ul>
 
 
@@ -910,7 +914,7 @@ All models must inherit <code>finmc.models.base.MCBase</code>.</p>
       <p>Base class for a Monte-Carlo process.</p>
 
               <details class="quote">
-                <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+                <summary>Source code in <code>finmc\models\base.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
@@ -1012,7 +1016,7 @@ All models must inherit <code>finmc.models.base.MCBase</code>.</p>
 to time zero.</p>
 
             <details class="quote">
-              <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+              <summary>Source code in <code>finmc\models\base.py</code></summary>
               <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span>
@@ -1044,7 +1048,7 @@ if this asset is handled by the model, otherwise return None.
 The return value is none, float, or an np array of floats.</p>
 
             <details class="quote">
-              <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+              <summary>Source code in <code>finmc\models\base.py</code></summary>
               <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-24">24</a></span>
 <span class="normal"><a href="#__codelineno-0-25">25</a></span>
 <span class="normal"><a href="#__codelineno-0-26">26</a></span>
@@ -1075,7 +1079,7 @@ The return value is none, float, or an np array of floats.</p>
 The return value is a float, or an np array of floats.</p>
 
             <details class="quote">
-              <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+              <summary>Source code in <code>finmc\models\base.py</code></summary>
               <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-30">30</a></span>
 <span class="normal"><a href="#__codelineno-0-31">31</a></span>
 <span class="normal"><a href="#__codelineno-0-32">32</a></span>
@@ -1108,7 +1112,7 @@ The return value is a float, or an np array of floats.</p>
 to a new time. The model may do so in multiple time steps.</p>
 
             <details class="quote">
-              <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+              <summary>Source code in <code>finmc\models\base.py</code></summary>
               <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
 <span class="normal"><a href="#__codelineno-0-36">36</a></span>
 <span class="normal"><a href="#__codelineno-0-37">37</a></span>
@@ -1150,7 +1154,7 @@ to a new time. The model may do so in multiple time steps.</p>
 specified by the TIMESTEP parameter.</p>
 
               <details class="quote">
-                <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+                <summary>Source code in <code>finmc\models\base.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-42">42</a></span>
 <span class="normal"><a href="#__codelineno-0-43">43</a></span>
 <span class="normal"><a href="#__codelineno-0-44">44</a></span>
@@ -1214,7 +1218,7 @@ specified by the TIMESTEP parameter.</p>
 less than the TIMESTEP parameter.</p>
 
             <details class="quote">
-              <summary>Source code in <code>.venv\Lib\site-packages\finmc\models\base.py</code></summary>
+              <summary>Source code in <code>finmc\models\base.py</code></summary>
               <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-52">52</a></span>
 <span class="normal"><a href="#__codelineno-0-53">53</a></span>
 <span class="normal"><a href="#__codelineno-0-54">54</a></span>

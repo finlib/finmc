@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#model" class="md-skip">
+        <a href="#model-dynamics" class="md-skip">
           Skip to content
         </a>
       
@@ -530,9 +530,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
+  <a href="#model-dynamics" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Model Dynamics
     </span>
   </a>
   
@@ -681,9 +681,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
+  <a href="#model-dynamics" class="md-nav__link">
     <span class="md-ellipsis">
-      Model
+      Model Dynamics
     </span>
   </a>
   
@@ -724,10 +724,13 @@
 
   <h1>Heston</h1>
 
-<h3 id="model">Model</h3>
 <figure>
 <p><img alt="Simulation" src="../../images/heston_vol_mc.png" /></p>
 </figure>
+<p>The Heston Model is a popular choice for pricing equity and FX options, where capturing the dynamics of volatility is important.
+It is a type of <em>stochastic volatility model</em>, which assumes that volatility is not constant but instead follows a random process.
+The Heston model has a semi-closed form solution for European options, enabling fast calibration of its parameters using market option prices.</p>
+<h3 id="model-dynamics">Model Dynamics</h3>
 <p>In the Heston model  the lognormal stock process <span class="arithmatex">\(X_t\)</span> is given by,</p>
 <div class="arithmatex">\[
 dX_t = (\mu - \frac{\nu_t}{2}) dt + \sqrt \nu_t dW_s
