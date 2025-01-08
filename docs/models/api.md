@@ -5,17 +5,21 @@ All models must inherit `finmc.models.base.MCBase`.
 
 ## MC Models in other repos
 
-These are implmentations of Monte-Carlo models in other repositories, using the `finmc` interface.
+These are implementations of Monte-Carlo models in other repositories, using the `finmc` interface.
 
 Models using `MCFixedStep` as base
 
-- [Local Vol Model using SVI vols](https://github.com/qatwalk/eq/blob/main/src/model/localvol.py)
-- [Qablet Intro to Custom Models](https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb)
-- [Heston Almost Exact Simulation](https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py)
+- [Local Vol Model using SVI vols](https://github.com/qatwalk/eq/blob/main/src/model/localvol.py) :
+a local vol model that calibrates on-the-fly from an SVI parameterized volatility surface. 
+- [Qablet Intro to Custom Models](https://github.com/qablet-academy/intro/blob/main/notebooks/2_1_custom_mc.ipynb):
+a step by step tutorial to write a Black-Scholes model using finmc interface.
+- [Heston Almost Exact Simulation](https://github.com/qablet-academy/heston_aes/blob/main/src/models/aes.py):
+variations of the Heston model.
 
 Models using `MCBase`:
 
-- [Rough Bergomi Model](https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py)
+- [Rough Bergomi Model](https://github.com/qatwalk/eq/blob/main/src/model/rbergomi.py):
+implementation of a Rough Bergomi model using a hybrid scheme for the Brownian semistationary processes.
 
 
 ::: finmc.models.base

@@ -4,7 +4,12 @@
   ![Simulation](../images/lv_mc.png)
 </figure>
 
-### Model
+
+The Local Volatility Model is an extension of the Black-Scholes model, where volatility is not constant but instead is assumed to be a function of the asset's current price and time. Using Dupire's method, this function, known as local volatility, can be calibrated from the implied volatility surface observed in the market.
+It is used for equity options, FX options, and commodity derivatives.
+
+
+### Model Dynamics
 
 In the Local Vol model the lognormal stock process \(X_t\) is given by,
 
@@ -49,27 +54,11 @@ spots = model.get_value("SPX")
 ```
 
 
-#### Vol Function
-
-`VOL` can be a function as shown below.
-
-```python
-def volfn(points):
-    # t is float, x_vec is a np array
-    (t, x_vec) = points
-
-    at = 5.0 * t + .01
-    atm = 0.04 + 0.01 * np.exp(-at)
-    skew = -1.5 * (1 - np.exp(-at)) / at
-    return np.sqrt(np.maximum(0.001, atm + x_vec * skew))
-
-
-lv_params = {"ASSET": "SPX", "VOL": volfn}
-```
 
 #### Vol Interpolator
 
-`VOL` can be an interpolator as below
+`VOL` can be specified using a 2D-array, vs time and strike,
+using an interpolator as below
 
 ```python
 from scipy.interpolate import RegularGridInterpolator
@@ -88,4 +77,25 @@ volinterp = RegularGridInterpolator(
 lv_params = {"ASSET": "SPX", "VOL": volinterp}
 ```
 
+
+#### Vol Function
+
+Alternatively, `VOL` can be specified as an arbitrary function, where the arg is a tuple of
+time (float) and log stock (1D-array)
+
+```python
+def volfn(points):
+    # t is float, x_vec is a np array
+    (t, x_vec) = points
+
+    at = 5.0 * t + .01
+    atm = 0.04 + 0.01 * np.exp(-at)
+    skew = -1.5 * (1 - np.exp(-at)) / at
+    return np.sqrt(np.maximum(0.001, atm + x_vec * skew))
+
+
+lv_params = {"ASSET": "SPX", "VOL": volfn}
+```
+
+### Example
 See [complete example here](https://github.com/finlib/finmc/blob/main/notebooks/localvol.ipynb)

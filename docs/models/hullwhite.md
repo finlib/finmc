@@ -4,7 +4,12 @@
   ![Simulation](../images/hw_rate_mc.png)
 </figure>
 
-### Model
+The Hull-White Model is widely used for interest rate contracts with optionality, such as caps, floors, and swaptions. 
+It is a type of *short rate model*, which features a mean-reverting short-rate process with a time-dependent drift.
+The Hull-White model has a closed-form or semi-closed form solution for many contracts such as caps, floors and zero bond options.
+
+
+### Model Dynamics
 
 In the Hull White model, the short-rate follows the following process.
 $$

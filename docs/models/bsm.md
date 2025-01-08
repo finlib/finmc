@@ -1,6 +1,10 @@
 # Multi-Asset BS
 
-### Model
+The Multi-Asset Black-Scholes Model is an extension of the classic Black-Scholes model that is used to price options on portfolios of multiple assets, or basket options.
+The model assumes that the assets in the basket follow geometric Brownian motions that are correlated.
+
+
+### Model Dynamics
 
 In a multi asset Black-Scholes model, for asset \(i\), the lognormal stock process \(X^i_t\) is,
 

@@ -1,8 +1,13 @@
-### Model
 
 <figure markdown="1">
   ![Simulation](../images/heston_vol_mc.png)
 </figure>
+
+The Heston Model is a popular choice for pricing equity and FX options, where capturing the dynamics of volatility is important.
+It is a type of *stochastic volatility model*, which assumes that volatility is not constant but instead follows a random process.
+The Heston model has a semi-closed form solution for European options, enabling fast calibration of its parameters using market option prices.
+
+### Model Dynamics
 
 In the Heston model  the lognormal stock process \(X_t\) is given by,
 
