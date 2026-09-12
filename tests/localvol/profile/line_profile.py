@@ -4,7 +4,7 @@ from line_profiler import LineProfiler
 
 from finmc.models.localvol import LVMC
 from finmc.utils.mc import antithetic_normal
-from tests.localvol.examples.option import run_model  # noqa: F401
+from tests.localvol.examples.option import run_model
 
 if __name__ == "__main__":
     # Create a LineProfiler object, specifying the methods to be profiled by line

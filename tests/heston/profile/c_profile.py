@@ -4,7 +4,7 @@ import cProfile
 import pstats
 from pstats import SortKey
 
-from tests.heston.examples.option import run_model  # noqa: F401
+from tests.heston.examples.option import run_model
 
 if __name__ == "__main__":
     run_model()  # Run once for cold start imports

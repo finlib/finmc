@@ -1,7 +1,8 @@
 import numpy as np
+from numpy.random import SFC64, Generator
+
 from finmc.models.base import MCFixedStep
 from finmc.utils.assets import Discounter, Forwards
-from numpy.random import SFC64, Generator
 
 
 class BSMC(MCFixedStep):

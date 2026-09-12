@@ -37,7 +37,7 @@ def impliedvol(target, F, K, T, is_call):
     MAX_ITERATIONS = 200
     PRECISION = 1.0e-5
     vol = 0.5
-    for i in range(0, MAX_ITERATIONS):
+    for i in range(MAX_ITERATIONS):
         d1, d2 = d1_d2(K, T, F, vol)
 
         if is_call:

@@ -16,7 +16,7 @@ def plot_iv(strikes, expirations, surface):
     """
 
     X, Y = np.meshgrid(strikes, expirations)
-    fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(6, 6))
+    _, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(6, 6))
     ax.plot_surface(
         X,
         Y,
@@ -48,7 +48,7 @@ def plot_atmvols(expirations, atm_vols):
     """
 
     # Add atm vol curve
-    fig, ax = plt.subplots(figsize=(5, 2))
+    _, ax = plt.subplots(figsize=(5, 2))
     ax.plot(
         expirations, atm_vols, color="brown", label="Forward Curve", marker="o"
     )

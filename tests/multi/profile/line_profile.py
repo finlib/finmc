@@ -3,7 +3,7 @@
 from line_profiler import LineProfiler
 
 from finmc.models.multi import BSMC
-from tests.multi.examples.option import run_model  # noqa: F401
+from tests.multi.examples.option import run_model
 
 if __name__ == "__main__":
     # Create a LineProfiler object, specifying the methods to be profiled by line

@@ -7,9 +7,9 @@ from finmc.models.base import MCBase
 def plot_asset(
     model: MCBase,
     asset_name: str,
-    sample_idxs=np.arange(0, 3, 1),
-    q_levels=np.linspace(0.02, 0.98, 25),
-    times=np.linspace(0, 1, 101),
+    sample_idxs=None,
+    q_levels=None,
+    times=None,
 ):
     """Plot the progression of an asset in a model.
 
@@ -23,6 +23,13 @@ def plot_asset(
     Examples:
         >>> plot_asset(model, "SPX")
     """
+
+    if sample_idxs is None:
+        sample_idxs = np.arange(0, 3, 1)
+    if q_levels is None:
+        q_levels = np.linspace(0.02, 0.98, 25)
+    if times is None:
+        times = np.linspace(0, 1, 101)
 
     num_levels = len(q_levels)
     num_steps = len(times)
@@ -38,7 +45,7 @@ def plot_asset(
         quantiles[:, i] = np.quantile(spots, q_levels)
         samples[:, i] = spots[sample_idxs]
 
-    fig, ax = plt.subplots(figsize=(8, 3))
+    _, ax = plt.subplots(figsize=(8, 3))
 
     for i in range(num_levels >> 1):
         ax.fill_between(

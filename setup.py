@@ -1,6 +1,5 @@
 """Python setup.py for finmc package"""
 
-import io
 import os
 
 from setuptools import find_packages, setup
@@ -15,7 +14,7 @@ def read(*paths, **kwargs):
     """
 
     content = ""
-    with io.open(
+    with open(
         os.path.join(os.path.dirname(__file__), *paths),
         encoding=kwargs.get("encoding", "utf8"),
     ) as open_file:

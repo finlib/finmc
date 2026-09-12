@@ -6,9 +6,8 @@ from abc import ABC, abstractmethod
 class MCBase(ABC):
     """Base class for a Monte-Carlo process."""
 
-    stats: dict = {}
-
     def __init__(self, dataset: dict) -> None:
+        self.stats: dict = {}
         self.dataset = dataset
         self.reset()
 
@@ -25,12 +24,11 @@ class MCBase(ABC):
         """Return the value of the asset at the current time,
         if this asset is handled by the model, otherwise return None.
         The return value is none, float, or an np array of floats."""
-        return None
+        return
 
     def get_df(self):
         """Return the discount factor at the current time.
         The return value is a float, or an np array of floats."""
-        ...
 
     @abstractmethod
     def advance(self, new_time: float):

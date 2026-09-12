@@ -27,7 +27,7 @@ def plot_distribution(
     spots = model.get_value(asset_name)
 
     # Plot distribution
-    fig, ax = plt.subplots(figsize=(6, 4))
+    _, ax = plt.subplots(figsize=(6, 4))
     ax.hist(spots, bins=100, density=True, alpha=0.3, color="r")
 
     ax.set_xlim(0, xmax * spots.mean())
