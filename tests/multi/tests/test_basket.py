@@ -1,12 +1,12 @@
 # Description: Tests for the multi asset black scholes model for vanilla options.
 
+import numpy as np
 import pytest
 from pytest import approx
 
 from finmc.utils.assets import Discounter, Forwards
-from tests.multi.dataset import data_three_asset
-import numpy as np
 from finmc.utils.bs import opt_price
+from tests.multi.dataset import data_three_asset
 
 
 def _basket_price_mc(model, maturity, strike, spots):

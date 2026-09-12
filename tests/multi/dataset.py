@@ -1,8 +1,9 @@
 # Description: datasets for the Heston model.
 
+import numpy as np
+
 from finmc.models.multi import BSMC
 from finmc.utils.assets import flat_discount, flat_fwds
-import numpy as np
 
 
 def data_three_asset():

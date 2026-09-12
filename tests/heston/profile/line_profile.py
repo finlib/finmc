@@ -6,7 +6,7 @@ from finmc.models.heston import (
     HestonMC,
 )
 from finmc.utils.mc import antithetic_normal
-from tests.heston.examples.option import run_model  # noqa: F401
+from tests.heston.examples.option import run_model
 
 if __name__ == "__main__":
     # Create a LineProfiler object, specifying the methods to be profiled by line
