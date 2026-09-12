@@ -37,14 +37,14 @@ def _create_interp_two_step(times, strikes, vols):
 # Description: datasets for the LVMC model.
 def _bs_vol(points):
     """A simple BS implied vol function with no skew."""
-    (t, x_vec) = points
+    (t, _x_vec) = points
     var = 0.04 + 0.04 * (1 - np.exp(-0.5 * t))  # No skew
     return np.sqrt(var)
 
 
 def _local_vol(points):
     """A local vol function derived from the above BS Vol function."""
-    (t, x_vec) = points
+    (t, _x_vec) = points
     f = np.exp(-0.5 * t)
     var = 0.04 + 0.04 * (1 - f + 0.5 * t * f)
     return np.sqrt(var)

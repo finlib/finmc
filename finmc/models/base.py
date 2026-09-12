@@ -6,9 +6,8 @@ from abc import ABC, abstractmethod
 class MCBase(ABC):
     """Base class for a Monte-Carlo process."""
 
-    stats: dict = {}
-
     def __init__(self, dataset: dict) -> None:
+        self.stats: dict = {}
         self.dataset = dataset
         self.reset()
 
